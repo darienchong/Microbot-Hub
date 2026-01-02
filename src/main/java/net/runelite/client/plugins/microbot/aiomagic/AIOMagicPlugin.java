@@ -57,6 +57,9 @@ public class AIOMagicPlugin extends Plugin {
     private SplashScript splashScript;
 
     @Inject
+    private StunScript stunScript;
+
+    @Inject
     private AlchScript alchScript;
 
     @Inject
@@ -118,6 +121,9 @@ public class AIOMagicPlugin extends Plugin {
             case SPLASHING:
                 splashScript.run();
                 break;
+            case STUNNING:
+                stunScript.run();
+                break;
             case ALCHING:
                 alchScript.run();
                 break;
@@ -144,6 +150,7 @@ public class AIOMagicPlugin extends Plugin {
 
     protected void shutDown() {
         splashScript.shutdown();
+        stunScript.shutdown();
         alchScript.shutdown();
         superHeatScript.shutdown();
         teleportScript.shutdown();
