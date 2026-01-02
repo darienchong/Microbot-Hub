@@ -31,9 +31,7 @@ import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -559,8 +557,9 @@ public class AIOCamdozScript extends Script {
                     // Not in combat
                     if (!golemsAttackingPlayer.isEmpty()) {
                         // Filter by things with an Attack option
-                        Rs2NpcModel targetGolem = golemsAttackingPlayer.stream()
-                                .filter(npc -> npc.getComposition() != null &&
+                        Rs2NpcModel targetGolem = golemsAttackingPlayer.
+                                stream().filter(
+                                        npc -> npc.getComposition() != null &&
                                         Arrays.stream(npc.getComposition().getActions())
                                                 .anyMatch(action -> action != null && action.toLowerCase().contains("attack")))
                                 .findFirst().orElse(null);
@@ -576,11 +575,21 @@ public class AIOCamdozScript extends Script {
                         break;
                     }
 
-                    golems = Rs2Npc.getNpcs(_golemID).collect(Collectors.toList());
+                    // Choose only golems that aren't in combat with other players
+                    golems = Rs2Npc.
+                            getNpcs(_golemID).
+                            filter(npc ->
+                                !npc.isDead() &&
+                                !npc.isInteracting()
+                            ).
+                            collect(Collectors.toList());
                     rubbles = Rs2Npc.getNpcs(_rubbleID).collect(Collectors.toList());
 
                     if (!golems.isEmpty()) {
-                        Rs2NpcModel golem = golems.stream().findFirst().orElse(null);
+                        Rs2NpcModel golem = golems.
+                            stream().
+                            findFirst().
+                            orElse(null);
 
                         if (!Rs2Camera.isTileOnScreen(golem.getLocalLocation())) {
                             Rs2Camera.turnTo(golem);
