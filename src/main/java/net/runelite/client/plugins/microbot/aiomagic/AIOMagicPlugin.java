@@ -9,8 +9,6 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.microbot.PluginConstants;
-import net.runelite.client.plugins.microbot.aiomagic.AIOMagicConfig;
-import net.runelite.client.plugins.microbot.aiomagic.AIOMagicOverlay;
 import net.runelite.client.plugins.microbot.aiomagic.enums.StunSpell;
 import net.runelite.client.plugins.microbot.aiomagic.enums.SuperHeatItem;
 import net.runelite.client.plugins.microbot.aiomagic.enums.TeleportSpell;
