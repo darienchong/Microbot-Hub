@@ -52,7 +52,7 @@ public class JewelryScript extends Script {
                 if (!Microbot.isLoggedIn()) return;
                 if (!super.run()) return;
                 long startTime = System.currentTimeMillis();
-                if (setFullView()) return;
+                // if (setFullView()) return;
                 
                 if (hasStateChanged()) {
                     state = updateState();
