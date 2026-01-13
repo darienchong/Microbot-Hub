@@ -59,7 +59,7 @@ public class BankerScript extends Script {
                 if (!Microbot.isLoggedIn()) return;
                 if(!super.run()) return;
                 if (config.bank() && needBanking() && !AIOFighterPlugin.needShopping) {
-                    if(handleBanking()){
+                    if (handleBanking()) {
                         Microbot.log("Banking handled successfully.");
                     }
                 } else if (!needBanking() &&
@@ -77,14 +77,13 @@ public class BankerScript extends Script {
                             Microbot.log("Should walk(Slayer Mode): " + shouldWalk);
                         }
                         else shouldWalk = true;
-                    }
-                    else {
+                    } else {
                         shouldWalk = true;
                         Microbot.log("Should walk: " + shouldWalk);
                     }
 
                     if (shouldWalk && Rs2Bank.closeBank()) {
-                         AIOFighterPlugin.setState(State.WALKING);
+                        AIOFighterPlugin.setState(State.WALKING);
                         Microbot.log("Walking to center location: " + config.centerLocation());
                         if (Rs2Walker.walkTo(config.centerLocation())) {
                              AIOFighterPlugin.setState(State.IDLE);
@@ -123,14 +122,9 @@ public class BankerScript extends Script {
             return false;
         }
 
-        if(bankingTriggered) {
-            return true;
-        }
-
         // (1) If inventory is full, we need to bank
         if (Rs2Inventory.isFull()) {
             Microbot.log("Inventory is full, triggering banking.");
-            bankingTriggered = true;
             Rs2Inventory.waitForInventoryChanges(2000);
             return true;
         }
@@ -138,7 +132,6 @@ public class BankerScript extends Script {
         // (2) If there are too few empty slots, missing slayer items, or the inventory setup changed
         if ((Rs2Inventory.emptySlotCount() <= config.minFreeSlots() && config.bank()) || needSlayerItems() || inventorySetupChanged) {
             Microbot.log("Low free slots, missing slayer items, or inventory setup changed, triggering banking.");
-            bankingTriggered = true;
             return true;
         }
         
@@ -392,10 +385,6 @@ public class BankerScript extends Script {
             inventorySetup.loadEquipment();
             inventorySetup.loadInventory();
 
-            bankingTriggered = false;
-
-
-
             if(needSlayerItems()){
                 if (config.slayerHasTaskWeakness()) {
                     if (Rs2Bank.hasBankItem(config.slayerTaskWeaknessItem())) {
@@ -470,10 +459,10 @@ public class BankerScript extends Script {
 //    }
 
     public boolean handleBanking() {
-         AIOFighterPlugin.setState(State.BANKING);
-        //bankingTriggered = true;
+        AIOFighterPlugin.setState(State.BANKING);
         Rs2Prayer.disableAllPrayers();
         if (Rs2Bank.walkToBankAndUseBank()) {
+            Rs2Bank.depositAll();
             withdrawUpkeepItems(config);
             
             // Use Pool of Restoration at Ferox if configured
