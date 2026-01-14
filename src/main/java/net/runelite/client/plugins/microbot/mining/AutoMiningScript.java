@@ -164,8 +164,11 @@ public class AutoMiningScript extends Script {
                                     Rs2Walker.walkTo(2841, 10339, 0);
                                 }
                             } else {
-                                if (!Rs2Bank.bankItemsAndWalkBackToOriginalPosition(itemNames, initialPlayerLocation, 0, config.distanceToStray()))
+                                if (config.useDepositBox() && Rs2DepositBox.bankItemsAndWalkBackToOriginalPosition(itemNames, initialPlayerLocation, 0, config.distanceToStray())) {
                                     return;
+                                } else if (!Rs2Bank.bankItemsAndWalkBackToOriginalPosition(itemNames, initialPlayerLocation, 0, config.distanceToStray())) {
+                                    return;
+                                }
                             }
 
                         } else {

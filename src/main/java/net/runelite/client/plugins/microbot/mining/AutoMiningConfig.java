@@ -99,10 +99,22 @@ public interface AutoMiningConfig extends Config {
     }
 
     @ConfigItem(
+            keyName = "UseDepositBox",
+            name = "UseDepositBox",
+            description = "Bank at deposit box",
+            position = 1,
+            section = bankingSection
+    )
+    default boolean useDepositBox()
+    {
+        return false;
+    }
+
+    @ConfigItem(
             keyName = "ItemsToBank",
             name = "Items to bank (Comma seperated)",
             description = "Items to bank",
-            position = 1,
+            position = 2,
             section = bankingSection
     )
     default String itemsToBank() {
