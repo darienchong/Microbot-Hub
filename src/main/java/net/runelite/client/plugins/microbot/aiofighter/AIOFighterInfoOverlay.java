@@ -66,6 +66,7 @@ public class AIOFighterInfoOverlay extends OverlayPanel {
                     .color(Color.ORANGE)
                     .build());
 
+            /*
             panelComponent.getChildren().add(LineComponent.builder().build());
             panelComponent.getChildren().add(LineComponent.builder()
                     .left("Slayer Mode: ")
@@ -101,6 +102,7 @@ public class AIOFighterInfoOverlay extends OverlayPanel {
                         .right(String.valueOf(config.slayerTaskWeaknessThreshold()))
                         .build());
             }
+            */
             panelComponent.getChildren().add(LineComponent.builder().build());
             panelComponent.getChildren().add(blacklistButton);
             panelComponent.getChildren().add(LineComponent.builder().build());

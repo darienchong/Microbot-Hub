@@ -35,7 +35,7 @@ public interface AIOFighterConfig extends Config {
             name = "Slayer",
             description = "Slayer",
             position = 11,
-            closedByDefault = false
+            closedByDefault = true
     )
     String slayerSection = "Slayer";
     @ConfigSection(
@@ -213,7 +213,7 @@ public interface AIOFighterConfig extends Config {
             section = foodAndPotionsSection
     )
     default boolean toggleFood() {
-        return false;
+        return true;
     }
 
     @ConfigItem(
@@ -257,7 +257,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default int minPriceOfItemsToLoot() {
-        return 5000;
+        return 100;
     }
 
     @ConfigItem(
@@ -280,7 +280,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleLootArrows() {
-        return false;
+        return true;
     }
 
     // toggle loot runes
@@ -292,7 +292,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleLootRunes() {
-        return false;
+        return true;
     }
 
     // toggle loot coins
@@ -304,7 +304,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleLootCoins() {
-        return false;
+        return true;
     }
 
     // toggle loot untreadables
@@ -316,7 +316,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleLootUntradables() {
-        return false;
+        return true;
     }
 
     @ConfigItem(
@@ -327,7 +327,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleBuryBones() {
-        return false;
+        return true;
     }
 
     @ConfigItem(
@@ -338,7 +338,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleScatter() {
-        return false;
+        return true;
     }
 
     // delayed looting
@@ -362,7 +362,7 @@ public interface AIOFighterConfig extends Config {
             section = lootSection
     )
     default boolean toggleOnlyLootMyItems() {
-        return false;
+        return true;
     }
 
     //Force loot regardless if we are in combat or not
@@ -418,7 +418,7 @@ public interface AIOFighterConfig extends Config {
             hidden = true
     )
     default boolean toggleWaitForLoot() {
-        return false;
+        return true;
     }
 
     @Range(min = 1, max = 10)
