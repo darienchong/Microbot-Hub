@@ -192,4 +192,15 @@ public interface AIOCamdozConfig extends Config {
     default boolean PickupGems() {
         return true;
     }
+
+    @ConfigItem(
+            name = "Pickup List",
+            keyName = "pickupList",
+            description = "Comma separated list of items to pick up.",
+            position = 11,
+            section = golemFighterSettingSection
+    )
+    default String PickupList() {
+        return "";
+    }
 }

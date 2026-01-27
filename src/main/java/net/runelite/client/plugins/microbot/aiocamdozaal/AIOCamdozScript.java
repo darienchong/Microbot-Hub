@@ -582,6 +582,7 @@ public class AIOCamdozScript extends Script {
                                 !npc.isDead() &&
                                 !npc.isInteracting()
                             ).
+                            sorted(Comparator.comparingInt((Rs2NpcModel npc) -> Rs2Player.getRs2WorldPoint().distanceToPath(npc.getWorldLocation()))).
                             collect(Collectors.toList());
                     rubbles = Rs2Npc.getNpcs(_rubbleID).collect(Collectors.toList());
 
@@ -591,12 +592,15 @@ public class AIOCamdozScript extends Script {
                             findFirst().
                             orElse(null);
 
-                        if (!Rs2Camera.isTileOnScreen(golem.getLocalLocation())) {
-                            Rs2Camera.turnTo(golem);
-                        }
+                        if (golem != null) {
+                            if (!Rs2Camera.isTileOnScreen(golem.getLocalLocation())) {
+                                Rs2Camera.turnTo(golem);
+                            }
 
-                        Rs2Npc.interact(golem, "Attack");
-                        Rs2Antiban.actionCooldown();
+
+                            Rs2Npc.interact(golem, "Attack");
+                            Rs2Antiban.actionCooldown();
+                        }
                     } else {
                         if (!rubbles.isEmpty()) {
                             Rs2NpcModel rubble = rubbles.stream().findFirst().orElse(null);
@@ -609,7 +613,6 @@ public class AIOCamdozScript extends Script {
                             Rs2Antiban.actionCooldown();
                             sleepUntil(() -> !golems.isEmpty(), 2000);
                         }
-
                     }
                 }
                 break;
@@ -703,6 +706,20 @@ public class AIOCamdozScript extends Script {
                     "uncut "
             );
             Rs2GroundItem.lootItemsBasedOnNames(gemItemParams);
+        }
+
+        if (!"".equals(_config.PickupList())) {
+            var itemNames = _config.PickupList().split(",");
+            LootingParameters itemParams = new LootingParameters(
+                    10,
+                    1,
+                    1,
+                    1,
+                    false,
+                    _config.LootOnlyMyDrops(),
+                    itemNames
+            );
+            Rs2GroundItem.lootItemsBasedOnNames(itemParams);
         }
     }
 
